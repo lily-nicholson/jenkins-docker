@@ -1,0 +1,85 @@
+- What is Docker?
+- Diff. between Docker and VM
+- Installation of Docker
+  - MacOS
+  - Windows
+  - Linux
+
+- Docker Tools / Component
+  - Docker Engine (Main Component CLI) --> Supported by ONLY LinuxOS 
+  - Docker Desktop (UI)
+    - Wrapper for Docker Engine on MacOS and Windows OS
+  - Docker Hub (Official Marketplace by Docker for Images)
+    - Amazon host Container Registry
+    - Digital Ocean host Container Registry
+    - Google Cloud
+    - Microsoft Azure
+    ...
+  - Docker Compose
+
+  - Important Component of Docker
+    - Docker Image
+    - Docker Container
+  
+  - Create Image
+    - Create a Dockerfile and configure it
+    - Run "docker build ." from the same folder where you kept Dockerfile
+    - List all the images by "docker images" command and read the Image Id
+
+  - Create a Container
+    - docker run <imageid>
+    - To view the containers
+      - docker ps -a (This will list all the Dead and Alive containers with the details)
+  
+  - Create Image with Tag Name and Version Name
+      docker build -t myapp:v2 . 
+  
+  - Create Container with Name, Specific Port and in Detach mode
+      docker run -d -p 3000:3000  myapp:v2   
+  
+  - In order to remove a Container, it must be stopped
+    docker stop <container_name or id>
+    docker rm <container_name or id>
+  
+  - In order to remove an Image, all of it's referenced containers must removed
+    docker rmi <imageId / imageName>
+
+  - Docker Help Structure
+    docker <section> <subsection> <subsubsection> <parameters>
+    docker container ps -a
+
+  - Run Docker Container with Interactive Mode
+    docker run -it -p 3005:3000 --name ContainerApp5 myapp:v1  bash 
+  
+  - Now, to connect a existing Container using BASH and in Interactive mode
+    docker exec -it ContainerApp5 bash
+  
+  - In order to get NANO installed, please execute it in IT mode and -
+    - apt-get update
+    - apt-get install nano
+    - Go to /app and then 
+      - nano index.js
+      - Modify the content as you want
+      - Ctrl + X to exit and Y to say Yes on Save while exiting the nano.
+  
+  - Logs
+    docker logs -f <container name> --> This is for Followup Logs
+    docker logs <container name> --> This is for all past logs
+  
+  - Remove Container after Stop or Exit
+    - docker run -d --rm -p 3002:3000 --name ContainerApp7 myapp:v9
+      This will remove the container right after we stop it either manually or if it crashed due to any reason
+
+  - Inspect the Container
+      docker container inspect <container id>
+
+  - Inspect the Image
+      docker image inspect <image id>
+
+  -  Copy Command
+    docker cp ./myname.txt ContainerApp7:/app 
+    docker cp ContainerApp7:/app . 
+  
+  - Environment Variables to be passed while creation of your Container
+    docker run --env PORT=3004  -d -p 3004:3004 dynamicapp:v1
+    docker run -e PORT=3004  -d -p 3004:3004 dynamicapp:v1

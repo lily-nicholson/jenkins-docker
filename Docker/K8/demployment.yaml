@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: declarative-deployment-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: declarative-deployment-app
+      tier: backend
+    template:
+      metadata:
+        labels:
+          app: declarative-deployment-app
+          tier: backend
+      spec:
+        containers:
+          - name: declarative-deployment-app-node
+            image: lilynicholson/myapp:latest
